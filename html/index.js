@@ -20,6 +20,12 @@ function clickEventPassword() {
         $(this).parent().remove();
         saveCheck();
     });
+
+    $("body > main > .password-wrapper .input-wrapper .side#copy").click(function() {
+        var copy = this.parentNode.querySelector("input").value;
+        navigator.clipboard.writeText(copy);
+        toasts('no-img', 'Copied to clipboard.');
+    });
 };
 
 function search() {
@@ -93,8 +99,6 @@ document.onscroll = e => {
         $("body > .searchBack").css("top", "-51px");
     }
 }
-
-
 
 
 
