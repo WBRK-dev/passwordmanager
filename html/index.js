@@ -81,11 +81,22 @@ function saveJson() {
     saveCheck();
 }
 
+// TODO - Create function to remove/add passwords.
+var password = {
+    remove: function() {
+        $("body > main > *:not(.search)").remove();
+        saveCheck();
+    },
+    add: function(domain, username, password) {
+        $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+password+'"><div class="side" id="passshow"><img src="./assets/img/visibility_full.svg" alt="password show"></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
+    }
+};
+
 // Initialize all passwords
 if (localStorage.getItem("passwords") !== null) {
     var passwords = JSON.parse(localStorage.getItem("passwords"));
     $.each(passwords, function (key, value) {
-        $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+value.domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+value.username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+value.password+'"><div class="side" id="passshow"><img src="./assets/img/visibility_full.svg" alt="password show"></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>')
+        password.add(value.domain, value.username, value.password);
     });
     clickEventPassword();
 } else {
