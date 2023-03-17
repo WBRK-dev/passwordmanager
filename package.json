@@ -21,7 +21,6 @@
     "electron-packager": "^17.1.1"
   },
   "dependencies": {
-    "electron-json-storage": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
     "git": "^0.1.5"
   }
