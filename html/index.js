@@ -1,5 +1,9 @@
+// All click events in a password wrapper.
 function clickEventPassword() {
+    // Disable all click events on side buttons in a password wrapper.
     $("body > main > .password-wrapper .input-wrapper .side").off('click');
+
+    // Function to show/hide the password.
     document.querySelectorAll("body > main > .password-wrapper div#passshow").forEach(elem => {elem.addEventListener("click", e => {
         if (e.target.tagName === "IMG") {
             target = e.target.parentNode;
@@ -16,11 +20,13 @@ function clickEventPassword() {
         }
     })});
 
+    // Function for removing a password wrapper.
     $("body > main > .password-wrapper #delete").click(function() {
         $(this).parent().remove();
         saveCheck();
     });
 
+    // Function to copy value from adjacent input.
     $("body > main > .password-wrapper .input-wrapper .side#copy").click(function() {
         var copy = this.parentNode.querySelector("input").value;
         navigator.clipboard.writeText(copy);
@@ -28,6 +34,7 @@ function clickEventPassword() {
     });
 };
 
+// Search on input in searchbar.
 function search() {
     var password_wrappers = document.querySelectorAll("body > main > .password-wrapper");
     $("body > main > .password-wrapper").css("display", "none");
@@ -42,6 +49,7 @@ function search() {
     });
 };
 
+// Check if something changed and display a save button.
 async function saveCheck() {
     var password_wrappers = document.querySelectorAll("body > main > .password-wrapper");
     var changed = false;
@@ -66,6 +74,7 @@ async function saveCheck() {
     }
 };
 
+// Save the passwords in local storage.
 function saveJson() {
     var jsonObj = [];
     var password_wrappers = document.querySelectorAll("body > main > .password-wrapper");
@@ -81,7 +90,7 @@ function saveJson() {
     saveCheck();
 }
 
-// TODO - Create function to remove/add passwords.
+// Password function for adding/removing passwords.
 var password = {
     remove: function() {
         $("body > main > *:not(.search)").remove();
@@ -92,7 +101,7 @@ var password = {
     }
 };
 
-// Initialize all passwords
+// Getting all passwords and displaying them.
 if (localStorage.getItem("passwords") !== null) {
     var passwords = JSON.parse(localStorage.getItem("passwords"));
     $.each(passwords, function (key, value) {
@@ -103,6 +112,7 @@ if (localStorage.getItem("passwords") !== null) {
     localStorage.setItem('passwords', '[]');
 };
 
+// Show/hide background for searchbar.
 document.onscroll = e => {
     if (document.documentElement.scrollTop > 50) {
         $("body > .searchBack").css("top", "0");

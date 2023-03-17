@@ -1,6 +1,8 @@
+// Hide all popups.
 $("popups > popup").hide();
 $("popups").hide();
 
+// Function for showing/hiding a popup.
 function popups(action, id) {
     if (action === 0) {
         $("popups > popup").hide();
@@ -12,10 +14,12 @@ function popups(action, id) {
     }
 }
 
+// Hide popup on cancel click.
 $("popups popup button#hidePopup").click(() => {
     popups();
 });
 
+// Check for save then show save popup.
 function addPasswordPopup() {
     saveCheck().then(promise => {
         if (promise) {
@@ -29,8 +33,9 @@ function addPasswordPopup() {
 
 
 
-// Custom popup JS
+// ----- Custom popup JS -----
 
+// Create new password wrapper on input.
 $("popups popup#addPassword button#submit").click(() => {
     var domain = $("popups popup#addPassword input#domain").val(); $("popups popup#addPassword input#domain").val("");
     var username = $("popups popup#addPassword input#username").val(); $("popups popup#addPassword input#username").val("");
@@ -43,6 +48,7 @@ $("popups popup#addPassword button#submit").click(() => {
     popups();
 });
 
+// Create new password wrapper on input.
 $("popups popup#addPassword button#submit2").click(() => {
     var domain = $("popups popup#addPassword input#domain").val(); $("popups popup#addPassword input#domain").val("");
     var username = $("popups popup#addPassword input#username").val(); $("popups popup#addPassword input#username").val("");
@@ -53,15 +59,18 @@ $("popups popup#addPassword button#submit2").click(() => {
     saveCheck();
 });
 
+// Open import passwords popup.
 $("popups > popup#settings button#import").click(function () {
     popups(0, 'import-passwords');
 });
 
+// Copy passwords to clipboard.
 $("popups > popup#settings button#export").click(function () {
     navigator.clipboard.writeText(localStorage.getItem('passwords'));
     toasts('no-img', 'Copied passwords to clipboard.');
 });
 
+// Import passwords functionality.
 $("popups > popup#import-passwords button#submit").click(function () {
     try {
         var passwords = JSON.parse($("popups > popup#import-passwords input").val());
