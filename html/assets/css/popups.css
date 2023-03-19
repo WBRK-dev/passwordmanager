@@ -13,11 +13,11 @@ popups {
 }
 
 popups > popup {
-    background-color: #fff;
+    background-color: var(--bg);
     padding: 10px;
     border-radius: 10px;
     max-width: max(20%, 300px);
-    box-shadow: 0 0 10px #000;
+    box-shadow: 0 0 10px var(--shadow);
 
     display: flex;
     flex-direction: column;
@@ -53,6 +53,9 @@ popups > popup input {
     outline: none;
     width: 300px;
     box-sizing: border-box;
+
+    color: var(--font);
+    background-color: var(--bg);
 
     transition: border 250ms;
 }

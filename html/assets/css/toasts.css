@@ -1,11 +1,11 @@
 toasts {
     display: block;
     z-index: 11;
-    background-color: #fff;
-    border: 1px solid #696969;
+    background-color: var(--bg);
+    border: 1px solid var(--border);
     border-radius: 50px;
     padding: 5px 10px;
-    box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 5px var(--shadow);
     overflow: hidden;
 
     position: fixed;

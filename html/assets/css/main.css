@@ -7,7 +7,7 @@ main {
 
 main > .password-wrapper {
     border-radius: 10px;
-    box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 5px var(--shadow);
     padding: 10px;
 
     display: flex;
@@ -26,9 +26,12 @@ main > .password-wrapper input {
     font-size: 16px;
     padding: 5px 8px;
     width: 100%;
-    border: 1px solid #696969;
+    border: 1px solid var(--border);
     border-radius: 5px 0 0 5px;
     outline: none;
+
+    background-color: var(--bg);
+    color: var(--font);
 
     transition: border 250ms;
 }
@@ -53,7 +56,7 @@ main > .password-wrapper .input-wrapper:not(:has(.side)) input {
     border-radius: 5px;
 }
 main > .password-wrapper .input-wrapper .side {
-    border: 1px solid #696969;
+    border: 1px solid var(--border);
     height: 28px;
     aspect-ratio: 1;
     border-radius: 0;
@@ -120,21 +123,22 @@ main > .search input {
     font-size: 16px;
     padding: 5px 8px;
     width: calc(100% - 16px);
-    /* border: 1px solid #696969; */
+    background-color: var(--bg);
     border: none;
     border-radius: 5px;
     outline: none;
-    box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 5px var(--shadow);
+    color: var(--font);
 }
 
 main > .search button {
     height: 28px;
     font-size: 17px;
-    background-color: blue;
+    background-color: var(--button-prim);
     color: #fff;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 5px var(--shadow);
 
     width: 160px;
 
@@ -143,14 +147,14 @@ main > .search button {
 
 main > .search button:hover,
 main > .search button:focus-visible {
-    background-color: #0000df;
+    background-color: var(--button-prim-hover);
 }
 
 .searchBack {
     height: 48px;
     width: 100%;
-    border-bottom: 1px solid #696969;
-    background-color: #fff;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg);
     z-index: 8;
     
     position: fixed;
@@ -168,7 +172,7 @@ a.prim,
 button.sec {
     display: block;
     font-size: 17px;
-    background-color: blue;
+    background-color: var(--button-prim);
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -177,23 +181,32 @@ button.sec {
     text-decoration: none;
     text-align: center;
 
-    box-shadow: 0 0 5px blue;
+    box-shadow: 0 0 5px var(--button-prim);
 }
 
 button.prim:hover,
 a.prim:hover,
 button.prim:focus-visible,
 a.prim:focus-visible {
-    background-color: #0000df;
+    background-color: var(--button-prim-hover);
 }
 
 button.sec {
     display: block;
-    background-color: #dba4a4;
+    background-color: var(--button-sec);
     box-shadow: none;
 }
 
 button.sec:hover,
 button.sec:focus-visible {
-    background-color: #af8888;
+    background-color: var(--button-sec-hover);
+}
+
+/* Image switch color scheme */
+body.dark img.light {
+    display: none !important;
+}
+
+body:not(.dark) img.dark {
+    display: none !important;
 }

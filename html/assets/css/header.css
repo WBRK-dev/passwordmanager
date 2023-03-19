@@ -28,7 +28,7 @@ header .header-img-button {
 }
 
 header .header-img-button:hover {
-    background-color: rgba(0, 0, 0, .15);
+    background-color: var(--header-button-hover);
 }
 
 header .header-img-button img {

@@ -6,15 +6,17 @@ function clickEventPassword() {
     // Function to show/hide the password.
     document.querySelectorAll("body > main > .password-wrapper div#passshow").forEach(elem => {elem.addEventListener("click", e => {
         if (e.target.tagName === "IMG") {
-            target = e.target.parentNode;
+            target = e.target.parentNode.parentNode;
         } else {target = e.target};
 
         if (target.classList.contains("enabled")) {
-            target.querySelector("img").setAttribute("src", "./assets/img/visibility_full.svg");
+            target.querySelector("#open").style.display = "block";
+            target.querySelector("#closed").style.display = "none";
             target.parentNode.querySelector("input").setAttribute("type", "password");
             target.classList.remove("enabled");
         } else {
-            target.querySelector("img").setAttribute("src", "./assets/img/visibility_off_full.svg");
+            target.querySelector("#closed").style.display = "block";
+            target.querySelector("#open").style.display = "none";
             target.parentNode.querySelector("input").setAttribute("type", "text");
             target.classList.add("enabled");
         }
@@ -97,7 +99,7 @@ var password = {
         saveCheck();
     },
     add: function(domain, username, password) {
-        $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+password+'"><div class="side" id="passshow"><img src="./assets/img/visibility_full.svg" alt="password show"></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
+        $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password" class="light"><img src="./assets/img/copy_full-white.svg" alt="copy" class="dark"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+password+'"><div class="side" id="passshow"><div id="open"><img src="./assets/img/visibility_full.svg" alt="show" class="light"><img src="./assets/img/visibility_full-white.svg" alt="show" class="dark"></div><div id="closed" style="display: none;"><img src="./assets/img/visibility_off_full.svg" alt="show" class="light"><img src="./assets/img/visibility_off_full-white.svg" alt="show" class="dark"></div></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password" class="light"><img src="./assets/img/copy_full-white.svg" alt="copy" class="dark"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
     }
 };
 
@@ -121,7 +123,19 @@ document.onscroll = e => {
     }
 }
 
+// Checking for user settings.
+if (localStorage.getItem("user_settings") !== null) {
+    var user_settings = JSON.parse(localStorage.getItem("user_settings"));
 
+    if (user_settings.theme === "dark") {
+        $("body").addClass("dark");
+        $("popups > popup#settings .section#theme #dark").attr("checked", "");
+    } else {
+        $("popups > popup#settings .section#theme #light").attr("checked", "");
+    }
+} else {
+    localStorage.setItem("user_settings", "{}");
+}
 
 // Update check
 var version = "1.1";

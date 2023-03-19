@@ -87,3 +87,14 @@ $("popups > popup#import-passwords button#submit").click(function () {
         toasts('no-img', 'An error occured.');
     }
 });
+
+$("popups > popup#settings .section#theme input").click(function() {
+    theme = this.id; if (theme === "dark") {
+        $("body").addClass("dark");
+    } else {
+        $("body").removeClass("dark");
+    }
+
+    json = {"theme": theme};
+    localStorage.setItem('user_settings', JSON.stringify(json));
+});
