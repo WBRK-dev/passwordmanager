@@ -93,21 +93,19 @@ function saveJson() {
 }
 
 // Password function for adding/removing passwords.
-var password = {
-    remove: function() {
-        $("body > main > *:not(.search)").remove();
-        saveCheck();
-    },
-    add: function(domain, username, password) {
-        $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password" class="light"><img src="./assets/img/copy_full-white.svg" alt="copy" class="dark"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+password+'"><div class="side" id="passshow"><div id="open"><img src="./assets/img/visibility_full.svg" alt="show" class="light"><img src="./assets/img/visibility_full-white.svg" alt="show" class="dark"></div><div id="closed" style="display: none;"><img src="./assets/img/visibility_off_full.svg" alt="show" class="light"><img src="./assets/img/visibility_off_full-white.svg" alt="show" class="dark"></div></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password" class="light"><img src="./assets/img/copy_full-white.svg" alt="copy" class="dark"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
-    }
+function passwordRemove() {
+    $("body > main > *:not(.search)").remove();
+    saveCheck();
 };
+function passwordAdd(domain, username, password) {
+    $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password" class="light"><img src="./assets/img/copy_full-white.svg" alt="copy" class="dark"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+password+'"><div class="side" id="passshow"><div id="open"><img src="./assets/img/visibility_full.svg" alt="show" class="light"><img src="./assets/img/visibility_full-white.svg" alt="show" class="dark"></div><div id="closed" style="display: none;"><img src="./assets/img/visibility_off_full.svg" alt="show" class="light"><img src="./assets/img/visibility_off_full-white.svg" alt="show" class="dark"></div></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password" class="light"><img src="./assets/img/copy_full-white.svg" alt="copy" class="dark"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
+}
 
 // Getting all passwords and displaying them.
 if (localStorage.getItem("passwords") !== null) {
     var passwords = JSON.parse(localStorage.getItem("passwords"));
     $.each(passwords, function (key, value) {
-        password.add(value.domain, value.username, value.password);
+        passwordAdd(value.domain, value.username, value.password);
     });
     clickEventPassword();
 } else {

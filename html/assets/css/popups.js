@@ -41,7 +41,7 @@ $("popups popup#addPassword button#submit").click(() => {
     var username = $("popups popup#addPassword input#username").val(); $("popups popup#addPassword input#username").val("");
     var password = $("popups popup#addPassword input#password").val(); $("popups popup#addPassword input#password").val("");
     
-    password.add(domain, username, password);
+    passwordAdd(domain, username, password);
     clickEventPassword();
     saveCheck();
 
@@ -54,7 +54,7 @@ $("popups popup#addPassword button#submit2").click(() => {
     var username = $("popups popup#addPassword input#username").val(); $("popups popup#addPassword input#username").val("");
     var password = $("popups popup#addPassword input#password").val(); $("popups popup#addPassword input#password").val("");
     
-    password.add(domain, username, password);
+    passwordAdd(domain, username, password);
     clickEventPassword();
     saveCheck();
 });
@@ -76,10 +76,10 @@ $("popups > popup#import-passwords button#submit").click(function () {
         var passwords = JSON.parse($("popups > popup#import-passwords input").val());
         $("popups > popup#import-passwords input").val('');
         if ($(this).attr('data-type') === 'replace') {
-            password.remove();
+            passwordRemove();
         };
         $.each(passwords, function (key, value) {
-            password.add(value.domain, value.username, value.password);
+            passwordAdd(value.domain, value.username, value.password);
         });
         popups();
         saveCheck();
