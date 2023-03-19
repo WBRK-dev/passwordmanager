@@ -136,7 +136,7 @@ if (localStorage.getItem("user_settings") !== null) {
 }
 
 // Update check
-var version = "1.1";
+var version = "1.2";
 $.ajaxSetup({ cache: false });
 $.getJSON('http://wbrk.ddns.net/res/library/json/passwordmanager.json', function (data) {
     if (parseInt(version) + 1 <= data.version) {
