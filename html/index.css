@@ -33,8 +33,10 @@ body.dark {
     --bg: #1b1b1b;
     --border: #858585;
     --font: #fff;
-    /* --shadow: transparent; */
     --header-button-hover: #3f3f3f;
+    --scrollbar-bg: #000000;
+    --scrollbar-thumb: #2e2e2e;
+    --scrollbar-thumb-hover: #575757;
 }
 
 
@@ -45,13 +47,13 @@ body.dark {
 }
 
 ::-webkit-scrollbar-track {
-    background: #F2F2F2;
+    background: var(--scrollbar-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #BDBDBD;
+    background: var(--scrollbar-thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #6E6E6E;
+    background: var(--scrollbar-thumb-hover);
 }
