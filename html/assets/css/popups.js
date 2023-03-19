@@ -1,6 +1,8 @@
+// Hide all popups.
 $("popups > popup").hide();
 $("popups").hide();
 
+// Function for showing/hiding a popup.
 function popups(action, id) {
     if (action === 0) {
         $("popups > popup").hide();
@@ -12,10 +14,12 @@ function popups(action, id) {
     }
 }
 
+// Hide popup on cancel click.
 $("popups popup button#hidePopup").click(() => {
     popups();
 });
 
+// Check for save then show save popup.
 function addPasswordPopup() {
     saveCheck().then(promise => {
         if (promise) {
@@ -29,52 +33,68 @@ function addPasswordPopup() {
 
 
 
-// Custom popup JS
+// ----- Custom popup JS -----
 
+// Create new password wrapper on input.
 $("popups popup#addPassword button#submit").click(() => {
     var domain = $("popups popup#addPassword input#domain").val(); $("popups popup#addPassword input#domain").val("");
     var username = $("popups popup#addPassword input#username").val(); $("popups popup#addPassword input#username").val("");
     var password = $("popups popup#addPassword input#password").val(); $("popups popup#addPassword input#password").val("");
     
-    $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+password+'"><div class="side" id="passshow"><img src="./assets/img/visibility_full.svg" alt="password show"></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
+    passwordAdd(domain, username, password);
     clickEventPassword();
     saveCheck();
 
     popups();
 });
 
+// Create new password wrapper on input.
 $("popups popup#addPassword button#submit2").click(() => {
     var domain = $("popups popup#addPassword input#domain").val(); $("popups popup#addPassword input#domain").val("");
     var username = $("popups popup#addPassword input#username").val(); $("popups popup#addPassword input#username").val("");
     var password = $("popups popup#addPassword input#password").val(); $("popups popup#addPassword input#password").val("");
     
-    $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+password+'"><div class="side" id="passshow"><img src="./assets/img/visibility_full.svg" alt="password show"></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
+    passwordAdd(domain, username, password);
     clickEventPassword();
     saveCheck();
 });
 
+// Open import passwords popup.
 $("popups > popup#settings button#import").click(function () {
     popups(0, 'import-passwords');
 });
 
+// Copy passwords to clipboard.
 $("popups > popup#settings button#export").click(function () {
     navigator.clipboard.writeText(localStorage.getItem('passwords'));
     toasts('no-img', 'Copied passwords to clipboard.');
 });
 
+// Import passwords functionality.
 $("popups > popup#import-passwords button#submit").click(function () {
     try {
         var passwords = JSON.parse($("popups > popup#import-passwords input").val());
         $("popups > popup#import-passwords input").val('');
         if ($(this).attr('data-type') === 'replace') {
-            $("main > *:not(#search)").remove();
+            passwordRemove();
         };
         $.each(passwords, function (key, value) {
-            $("body > main").append('<div class="password-wrapper"><div class="wrapper"><div class="input-wrapper"><p>Domain:</p><input type="text" id="domain" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+value.domain+'"></div><div class="input-wrapper"><p>Username:</p><input type="text" id="username" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+value.username+'"><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div><div class="input-wrapper"><p>Password:</p><input type="password" id="password" onchange="saveCheck()" onkeypress="saveCheck()" oninput="saveCheck()" value="'+value.password+'"><div class="side" id="passshow"><img src="./assets/img/visibility_full.svg" alt="password show"></div><div class="side" id="copy"><img src="./assets/img/copy_full.svg" alt="copy password"></div></div></div><div id="delete"><img src="./assets/img/delete_full.svg" alt="delete"></div></div>');
+            passwordAdd(value.domain, value.username, value.password);
         });
         popups();
         saveCheck();
     } catch (error) {
         toasts('no-img', 'An error occured.');
     }
+});
+
+$("popups > popup#settings .section#theme input").click(function() {
+    theme = this.id; if (theme === "dark") {
+        $("body").addClass("dark");
+    } else {
+        $("body").removeClass("dark");
+    }
+
+    json = {"theme": theme};
+    localStorage.setItem('user_settings', JSON.stringify(json));
 });

@@ -4,9 +4,8 @@
   "description": "Password Manager made by WBR_K.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron-forge start",
-    "start-win": "electron .",
+    "start": "electron .",
+    "start-forge": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
@@ -22,7 +21,6 @@
     "electron-packager": "^17.1.1"
   },
   "dependencies": {
-    "electron-json-storage": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
     "git": "^0.1.5"
   }

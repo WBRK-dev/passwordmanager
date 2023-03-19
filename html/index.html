@@ -9,7 +9,7 @@
 	<title>Password Manager</title>
 </head>
 <body>
-	<header><p class="title">Password Manager</p><div class="right-wrapper"><a href="http://wbrk.ddns.net/library/?p=passwordmanager" id="update-button" class="header-img-button" style="display: none;" title="Update Password Manager"><img src="./assets/img/upgrade_full.svg" alt="update"></a><div class="header-img-button" onclick="addPasswordPopup()"><img src="./assets/img/add_full.svg" alt="settings"></div><div class="header-img-button" onclick="popups(0, 'settings')"><img src="./assets/img/cog_full.svg" alt="settings"></div></div></header>
+	<header><p class="title">Password Manager</p><div class="right-wrapper"><a href="http://wbrk.ddns.net/library/?p=passwordmanager" id="update-button" class="header-img-button" style="display: none;" title="Update Password Manager"><img src="./assets/img/upgrade_full.svg" alt="update" class="light"><img src="./assets/img/upgrade_full-white.svg" alt="update" class="dark"></a><div class="header-img-button" onclick="addPasswordPopup()"><img src="./assets/img/add_full.svg" alt="settings" class="light"><img src="./assets/img/add_full-white.svg" alt="settings" class="dark"></div><div class="header-img-button" onclick="popups(0, 'settings')"><img src="./assets/img/cog_full.svg" alt="settings" class="light"><img src="./assets/img/cog_full-white.svg" alt="settings" class="dark"></div></div></header>
 	<main>
 		<div class="search" id="search"><input type="text" placeholder="Search..." onchange="search()" onkeypress="search()" oninput="search()"><button style="display: none;" onclick="saveJson()">Save Changes</button></div>
 		
@@ -31,11 +31,16 @@
 			<button class="prim" id="submit2">Save & add another</button>
 		</popup>
 		<popup class="big" id="settings">
-			<header><p class="title">Settings</p><div class="right-wrapper"><div class="header-img-button" onclick="popups()"><img src="./assets/img/add_full.svg" alt="close" style="transform: rotateZ(45deg);"></div></div></header>
+			<header><p class="title">Settings</p><div class="right-wrapper"><div class="header-img-button" onclick="popups()"><img src="./assets/img/add_full.svg" alt="close" style="transform: rotateZ(45deg);" class="light"><img src="./assets/img/add_full-white.svg" alt="close" style="transform: rotateZ(45deg);" class="dark"></div></div></header>
 			<main>
 				<div class="section">
 					<p class="section-title">Import or Export your passwords.</p>
 					<div class="flex"><button class="prim" id="import" style="max-width: 300px; box-shadow: none;">Import</button><button class="prim" id="export" style="max-width: 300px; box-shadow: none;">Export</button></div>
+				</div>
+				<div class="section" id="theme">
+					<p class="section-title">Theme</p>
+					<div class="flex"><input type="radio" name="theme" id="light" style="width: auto;"><p>Light</p></div>
+					<div class="flex"><input type="radio" name="theme" id="dark" style="width: auto;"><p>Dark</p></div>
 				</div>
 			</main>
 		</popup>
