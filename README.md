@@ -3,5 +3,5 @@ Electron powered non-encrypted password manager.
 
 ## Availability
 #### Windows: v1.2
-#### Linux: Planned
+#### Linux: v1.2
 #### MacOS: Not Planned
